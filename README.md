@@ -72,11 +72,11 @@ Please run: `git-initializer add --key=GIT_API_KEY --user=GIT_USER to add GIT_AP
 - `curl`
 
   ```bash
-  curl -sSL https://raw.githubusercontent.com/d02ev/git-initializer/main/install.sh | bash
+  curl -sSL https://raw.githubusercontent.com/d02ev/git-initializer/main/git-initializer.sh | bash
   ```
 
 - `wget`
 
   ```bash
-  wget -O - https://raw.githubusercontent.com/d02ev/git-initializer/main/install.sh | bash
+  wget -O - https://raw.githubusercontent.com/d02ev/git-initializer/main/git-initializer.sh | bash
   ```
