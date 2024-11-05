@@ -11,6 +11,7 @@ if ! command -v go &> /dev/null; then
   echo "The tool requires Go to be installed. Please install Go and try again."
   echo "Install Go from https://golang.org/dl/"
   exit 1
+fi
 
 # clone the repository
 echo "Cloning the repository...."
@@ -44,5 +45,3 @@ echo "Run '$TOOL_NAME' in the terminal to get started."
 
 echo "To configure your Git credentials, use:"
 echo "$TOOL_NAME add --key=YOUR_GIT_API_KEY --user=YOUR_GIT_USERNAME"
-
-exit 0
