@@ -66,3 +66,17 @@ Git username for authentication.
 Please run: `git-initializer add --key=GIT_API_KEY --user=GIT_USER to add GIT_API_KEY and GIT_USER before initializing a new repository`
 
 `GIT_API_KEY` can be found under `Settings > Developer Settings > Personal access tokens > <Generate new token>` in your GitHub account.
+
+## Installation
+
+- `curl`
+
+  ```bash
+  curl -sSL https://raw.githubusercontent.com/d02ev/git-initializer/main/install.sh | bash
+  ```
+
+- `wget`
+
+  ```bash
+  wget -O - https://raw.githubusercontent.com/d02ev/git-initializer/main/install.sh | bash
+  ```
