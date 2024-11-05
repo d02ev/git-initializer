@@ -44,3 +44,5 @@ echo "Run '$TOOL_NAME' in the terminal to get started."
 
 echo "To configure your Git credentials, use:"
 echo "$TOOL_NAME add --key=YOUR_GIT_API_KEY --user=YOUR_GIT_USERNAME"
+
+exit 0
