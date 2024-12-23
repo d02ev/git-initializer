@@ -13,7 +13,7 @@ extern const std::string KEY_FLAG;
 extern const std::string INIT_ARG;
 extern const std::string ADD_ARG;
 
-extern const std::string GIT_API_URL;
+extern const std::string GIT_API_BASE_URL;
 extern const std::string GIT_HOME_BASE_URL;
 extern const std::string GIT_API_AUTH_HEADER_NAME;
 extern const std::string GIT_API_AUTH_HEADER_VALUE;
@@ -39,6 +39,8 @@ extern const std::string VALID_IGN_LIST_FILE_NAME;
 
 extern const std::string VALID_ARGS[4];
 extern const std::string VALID_FLAGS[3];
+
+extern const std::string ENV_ADD_HELPER_MSG;
 
 enum class LogLevel {
   Error,

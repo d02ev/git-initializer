@@ -10,7 +10,7 @@ const std::string KEY_FLAG = "--key";
 const std::string INIT_ARG = "init";
 const std::string ADD_ARG = "add";
 
-const std::string GIT_API_URL = "https://api.github.com/user/repos";
+const std::string GIT_API_BASE_URL = "https://api.github.com";
 const std::string GIT_HOME_BASE_URL = "https://github.com";
 const std::string GIT_API_AUTH_HEADER_NAME = "Authorization";
 const std::string GIT_API_AUTH_HEADER_VALUE = "Bearer";
@@ -36,3 +36,6 @@ const std::string VALID_IGN_LIST_FILE_NAME = "valid_ignores_list.txt";
 
 const std::string VALID_ARGS[4] = {"lsig", "lsc", "init", "add"};
 const std::string VALID_FLAGS[3] = {"--ig", "--key", "--user"};
+
+const std::string ENV_ADD_HELPER_MSG =
+    "Please run: git-initializer add --key=<key> --user=<user> to add <key> and <user> before initializing a new repository";
