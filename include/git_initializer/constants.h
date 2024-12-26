@@ -36,6 +36,7 @@ extern const std::string README_FILE_NAME;
 extern const std::string STATIC_FILE_DIR_NAME;
 extern const std::string IGN_JSON_FILE_NAME;
 extern const std::string VALID_IGN_LIST_FILE_NAME;
+extern const std::string HELP_MSG_FILE_NAME;
 
 extern const std::string VALID_ARGS[4];
 extern const std::string VALID_FLAGS[3];

@@ -1,25 +1,25 @@
 git-initializer: A CLI tool to manage the initial workflow of a new Git repository.
 
 Usage:
-	git-initializer <command> [options]
+ git-initializer <command> [options]
 
 Commands:
-	init		Initializes the current directory as a Git repository and creates a remote repository
-					Usage: git-initializer init [--ig=dotenv,visualstudiocode,vs,linux]
-					Options:
-						--ig=<ignore_files>		Comma separated list of ignore files
+ init  Initializes the current directory as a Git repository and creates a remote repository
+	    Usage: git-initializer init [--ig=dotenv,visualstudiocode,vs,linux]
+		Options:
+		 --ig=<ignore_files>  Comma separated list of ignore files
 
-	add			Adds Git API key and Git user to OS environment
-					Usage: git-initializer add --key=GIT_KEY --user=GIT_USER
-					Options:
-						--key=<key>		Git API key for authentication
-						--user=<user>	Git username for repository access
+ add   Adds Git API key and Git user to OS environment
+		Usage: git-initializer add --key=GIT_KEY --user=GIT_USER
+		Options:
+		 --key=<key>  Git API key for authentication
+		 --user=<user>  Git username for repository access
 
-	lsig		Lists valid ignore files
+ lsig  Lists valid ignore files
 
 Note:
-	Please run: git-initializer add --key=<key> --user=<user> to add <key> and <user> before initializing a new repository
+ Please run: git-initializer add --key=<key> --user=<user> to add <key> and <user> before initializing a new repository
 
 Examples:
-	git-initializer init [--ig=dotenv,visualstudiocode,vs,linux]
-	git-initializer add --key=GIT_KEY --user=GIT_USER
+ git-initializer init [--ig=dotenv,visualstudiocode,vs,linux]
+ git-initializer add --key=GIT_KEY --user=GIT_USER

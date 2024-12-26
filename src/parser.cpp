@@ -1,13 +1,16 @@
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <format>
-#include <json/value.h>
 #include "git_initializer/parser.h"
-#include "git_initializer/utils.h"
-#include "git_initializer/helper.h"
+#include <format>
+#include <fstream>
+#include <iostream>
+#include <json/value.h>
+#include <vector>
 
-void ArgParser::parse_add_arg(const std::string& git_key, const std::string& git_user) noexcept {
+#include <json/writer.h>
+
+#include "git_initializer/helper.h"
+#include "git_initializer/utils.h"
+
+void ArgParser::parse_add_arg(const std::string &git_key, const std::string &git_user) noexcept {
   auto [git_key_empty, git_key_msg] = Utils::has_empty_arg_value(GIT_KEY, git_key);
   auto [git_user_empty, git_user_msg] = Utils::has_empty_arg_value(GIT_USER, git_user);
 
@@ -43,18 +46,18 @@ void ArgParser::parse_add_arg(const std::string& git_key, const std::string& git
   }
 }
 
-void ArgParser::parse_init_arg(const std::string& ign_arg_val) noexcept {
+void ArgParser::parse_init_arg(const std::string &ign_arg_val) noexcept {
   Helper::log(std::format("Checking if {} and {} are added to the user profile....", GIT_KEY, GIT_USER),
               LogLevel::Info);
   Helper::add_delay();
 
   if (auto [env_exists, env] = Utils::env_exists(); env_exists) {
-    std::string ign_files = "";
+    std::string ign_files;
     if (!ign_arg_val.empty()) {
       // TODO: Implement `trim()` to remove trailing whitespaces
       ign_files = ign_arg_val;
     } else {
-      Helper::log(std::format("No ignore files specified - defaulting to: ", DEFAULT_IGN_FILES), LogLevel::Info);
+      Helper::log(std::format("No ignore files specified - defaulting to: {}", DEFAULT_IGN_FILES), LogLevel::Info);
       ign_files = DEFAULT_IGN_FILES;
     }
 
@@ -62,14 +65,14 @@ void ArgParser::parse_init_arg(const std::string& ign_arg_val) noexcept {
     std::string ign_file_content;
     Json::Value ign_files_json = Utils::read_ignores_json();
 
-    for (const std::string& file_name : ign_file_names) {
+    for (const std::string &file_name: ign_file_names) {
       if (ign_files_json[file_name].isNull()) {
         Helper::log(std::format("Invalid ignore file: {}", file_name), LogLevel::Error);
         Helper::log("Please run: git-initializer lsig to see available ignore files", LogLevel::Info);
         Helper::exit_gracefully();
       }
 
-      ign_file_content += ign_files_json[file_name].asString();
+      ign_file_content += ign_files_json[file_name]["contents"].asString();
     }
 
     Utils::create_readme_and_gitignore(ign_file_content);
@@ -94,8 +97,7 @@ void ArgParser::parse_list_valid_ignore_files_arg() noexcept {
 
   std::vector<std::string> valid_ign_files = Utils::read_valid_ignores_txt();
 
-  for (const std::string& file_name : valid_ign_files) {
+  for (const std::string &file_name: valid_ign_files) {
     std::cout << file_name << std::endl;
   }
 }
-

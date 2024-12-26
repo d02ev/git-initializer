@@ -22,7 +22,7 @@ const std::string GIT_CONTENT_TYPE_HEADER_NAME = "Content-Type";
 const std::string GIT_CONTENT_TYPE_HEADER_VALUE = "application/json";
 
 const std::string ERROR_CLR = "\033[31m";
-const std::string INFO_CLR = "\033[32m";
+const std::string INFO_CLR = "\033[34m";
 const std::string SUCCESS_CLR = "\033[32m";
 const std::string RESET = "\033[0m";
 
@@ -33,6 +33,7 @@ const std::string README_FILE_NAME = "README.md";
 const std::string STATIC_FILE_DIR_NAME = ".git-initializer";
 const std::string IGN_JSON_FILE_NAME = "ignores.json";
 const std::string VALID_IGN_LIST_FILE_NAME = "valid_ignores_list.txt";
+const std::string HELP_MSG_FILE_NAME = "help_msg.txt";
 
 const std::string VALID_ARGS[4] = {"lsig", "lsc", "init", "add"};
 const std::string VALID_FLAGS[3] = {"--ig", "--key", "--user"};

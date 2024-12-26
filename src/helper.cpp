@@ -14,10 +14,10 @@ std::pair<bool, std::string> Helper::check_env_existence() noexcept {
   if (git_key_env.empty() && git_user_env.empty()) {
     return {false, std::format("{} and {}", GIT_KEY, GIT_USER)};
   }
-  if (git_key_env.empty()) {
+  if (git_key_env.empty() && !git_user_env.empty()) {
     return {false, GIT_KEY};
   }
-  if (git_user_env.empty()) {
+  if (git_user_env.empty() && !git_key_env.empty()) {
     return {false, GIT_USER};
   }
 

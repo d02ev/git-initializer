@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 find_package(jsoncpp CONFIG REQUIRED)
 find_package(httplib CONFIG REQUIRED)
+find_package(OpenSSL REQUIRED)
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
 

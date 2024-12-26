@@ -1,4 +1,3 @@
-#include "git_initializer/utils.h"
 #include <filesystem>
 #include <format>
 #include <fstream>
@@ -7,7 +6,10 @@
 #include <json/value.h>
 #include <unordered_map>
 #include "git_initializer/constants.h"
+#include "git_initializer/utils.h"
 #include "git_initializer/helper.h"
+
+#define CPPHTTPLIB_OPENSSL_SUPPORT
 #include "httplib.h"
 
 std::pair<bool, std::string> Utils::has_correct_arg_count(const std::string &arg_name, const int arg_count) noexcept {
@@ -120,6 +122,7 @@ Json::Value Utils::read_ignores_json() noexcept {
   Json::Reader ignores_json_reader;
 
   ignores_json_reader.parse(ign_json_file, ignores_json);
+  ign_json_file.close();
 
   return ignores_json;
 }
@@ -144,6 +147,23 @@ std::vector<std::string> Utils::read_valid_ignores_txt() noexcept {
   return valid_ign_files;
 }
 
+void Utils::read_help_msg_txt() noexcept {
+  std::string help_msg_txt_file_path = Helper::get_static_file_path(HELP_MSG_FILE_NAME);
+  std::ifstream help_msg_file(help_msg_txt_file_path);
+
+  if (!help_msg_file.good()) {
+    Helper::log("An internal error occurred", LogLevel::Internal);
+    Helper::exit_gracefully();
+  }
+
+  std::string line;
+  while (std::getline(help_msg_file, line)) {
+    std::cout << line << std::endl;
+  }
+
+  help_msg_file.close();
+}
+
 void Utils::create_remote_repo() noexcept {
   Helper::log("Creating remote_repo...", LogLevel::Info);
   Helper::add_delay();
@@ -159,7 +179,7 @@ void Utils::create_remote_repo() noexcept {
       {GIT_API_VERSION_HEADER_NAME, GIT_API_VERSION_HEADER_VALUE}};
   std::unordered_map<std::string, std::string> req_data = {
       {"name", repo_name},
-      {"private", "false"},
+      {"private", std::to_string(false)},
       {"homepage", std::format("{}/{}/{}", GIT_HOME_BASE_URL, git_user, repo_name)}};
 
   Json::Value req_json_data;
@@ -208,4 +228,5 @@ void Utils::run_git_commands() noexcept {
   }
 
   Helper::log("Remote origin added successfully", LogLevel::Success);
+  Helper::add_delay();
 }

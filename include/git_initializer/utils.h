@@ -29,6 +29,8 @@ public:
 
   static std::vector<std::string> read_valid_ignores_txt() noexcept;
 
+  static void read_help_msg_txt() noexcept;
+
   static void create_remote_repo() noexcept;
 
   static void run_git_commands() noexcept;

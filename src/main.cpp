@@ -7,8 +7,7 @@
 
 int main(int argc, char *argv[]) {
   if (argc == 1) {
-    // TODO: parse the `help_msg.txt` file
-    std::cout << "Under construction" << std::endl;
+    Utils::read_help_msg_txt();
     return 0;
   }
 
@@ -20,18 +19,25 @@ int main(int argc, char *argv[]) {
   if (argv[1] == INIT_ARG) {
     if (argc == 2) {
       ArgParser::parse_init_arg("");
+      return 0;
     }
 
     std::vector<std::string> ign_flag_vals = Helper::split_str(argv[2], '=');
-    ArgParser::parse_init_arg(ign_flag_vals.at(2));
+    ArgParser::parse_init_arg(ign_flag_vals.at(1));
+
+    return 0;
   }
   if (argv[1] == ADD_ARG) {
-    std::cout << argv[2] << " " << argv[3] << std::endl;
     std::vector<std::string> key_flag_vals = Helper::split_str(argv[2], '=');
     std::vector<std::string> user_flag_vals = Helper::split_str(argv[3], '=');
     ArgParser::parse_add_arg(key_flag_vals.at(1), user_flag_vals.at(1));
+
+    return 0;
   }
   if (argv[1] == LIST_IGNORES_ARG) {
     ArgParser::parse_list_valid_ignore_files_arg();
+    return 0;
   }
+
+  return 1;
 }
