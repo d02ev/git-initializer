@@ -1,6 +1,7 @@
-add_executable(git-initializer main.cpp constants.cpp
+add_executable(git-initializer main.cpp
         utils.cpp
         helper.cpp
-        parser.cpp)
+        parser/parser.cpp
+        cmd/add.cpp)
 
 target_link_libraries(git-initializer PRIVATE JsonCpp::JsonCpp httplib::httplib OpenSSL::SSL OpenSSL::Crypto)

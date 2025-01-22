@@ -10,11 +10,11 @@ public:
 
   ~Helper() = default;
 
-  static std::pair<bool, std::string> check_env_existence() noexcept;
+  static bool check_env_config_existence(constants::EnvType env_type) noexcept;
 
   static std::string sanitize_dir_name(const std::string &dir_name) noexcept;
 
-  static void log(const std::string &msg, LogLevel log_level) noexcept;
+  static void log(const std::string &err_msg, constants::LogLevel log_level) noexcept;
 
   static void add_delay(int delay_ms = 1000) noexcept;
 
@@ -25,6 +25,8 @@ public:
   static void exit_ungracefully() noexcept;
 
   static std::vector<std::string> split_str(const std::string &s, char delim) noexcept;
+
+  static bool to_bool(const std::string &str) noexcept;
 };
 
 #endif // HELPER_H

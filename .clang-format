@@ -21,7 +21,7 @@ BraceWrapping:
   BeforeElse: false
   BeforeLambdaBody: false
   BeforeWhile: false
-  SplitEmptyFunction: true
+  SplitEmptyFunction: false
   SplitEmptyRecord: true
   SplitEmptyNamespace: true
 BreakBeforeBraces: Custom
@@ -45,7 +45,7 @@ MaxEmptyLinesToKeep: 2
 NamespaceIndentation: All
 SpaceAfterCStyleCast: true
 SpaceAfterTemplateKeyword: false
-SpaceBeforeRangeBasedForLoopColon: false
+SpaceBeforeRangeBasedForLoopColon: true
 SpaceInEmptyParentheses: false
 SpacesInAngles: false
 SpacesInConditionalStatement: false

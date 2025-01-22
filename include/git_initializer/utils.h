@@ -4,10 +4,11 @@
 #include <json/value.h>
 #include <string>
 
+#include "constants.h"
+
 class Utils {
 public:
   Utils() = default;
-
   ~Utils() = default;
 
   static std::pair<bool, std::string> has_correct_arg_count(const std::string &arg_name, int arg_count) noexcept;
@@ -22,6 +23,9 @@ public:
   static bool invalid_ignore_file_value(const std::string &arg_value) noexcept(false);
 
   static std::pair<bool, std::string> env_exists() noexcept;
+
+  static void export_env_config(constants::EnvType env_type, const std::string &git_key,
+                                const std::string &git_user) noexcept;
 
   static Json::Value read_ignores_json() noexcept;
 
