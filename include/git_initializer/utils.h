@@ -38,6 +38,8 @@ public:
   static void create_remote_repo() noexcept;
 
   static void run_git_commands() noexcept;
+
+  static std::string generate_suggestions(const std::string &invalid_file_name) noexcept;
 };
 
 #endif // UTILS_H

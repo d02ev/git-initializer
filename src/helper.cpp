@@ -1,11 +1,11 @@
-#include "git_initializer/helper.h"
 #include <chrono>
+#include <fstream>
+#include <git_initializer/constants.h>
+#include <git_initializer/helper.h>
 #include <iostream>
-#include <sstream>
 #include <string>
 #include <thread>
 #include <vector>
-#include "git_initializer/constants.h"
 
 
 bool Helper::check_env_config_existence(constants::EnvType env_type) noexcept {
@@ -31,6 +31,7 @@ std::string Helper::sanitize_dir_name(const std::string &dir_name) noexcept {
   while (i >= 0 && dir_name.at(i) != '/') {
     sanitized_dir_name.push_back(dir_name.at(i--));
   }
+  std::reverse(sanitized_dir_name.begin(), sanitized_dir_name.end());
 
   return sanitized_dir_name;
 }
@@ -93,3 +94,24 @@ std::string Helper::get_static_file_path(const std::string &filename) noexcept {
 }
 
 bool Helper::to_bool(const std::string &str) noexcept { return std::stoi(str) != 0; }
+
+void Helper::trim_whitespaces(std::string &str) noexcept { std::erase(str, ' '); }
+
+std::vector<std::string> Helper::load_valid_ign_file_names() noexcept {
+  std::string valid_ign_file_name_path = get_static_file_path(constants::VALID_IGN_LIST_FILE_NAME);
+  std::vector<std::string> valid_ign_file_names;
+  std::ifstream file(valid_ign_file_name_path, std::ios::in | std::ios::binary);
+
+  if (!file.is_open()) {
+    log(std::format("Error opening {}", constants::VALID_IGN_LIST_FILE_NAME), constants::LogLevel::Error);
+    exit_ungracefully();
+  }
+
+  std::string line;
+  while (std::getline(file, line)) {
+    valid_ign_file_names.emplace_back(line);
+  }
+
+  file.close();
+  return valid_ign_file_names;
+}

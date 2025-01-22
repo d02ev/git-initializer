@@ -1,16 +1,17 @@
-#include "git_initializer/utils.h"
 #include <filesystem>
 #include <format>
 #include <fstream>
+#include <git_initializer/constants.h>
+#include <git_initializer/helper.h>
+#include <git_initializer/utils.h>
 #include <json/json.h>
 #include <json/reader.h>
 #include <json/value.h>
+#include <regex>
 #include <unordered_map>
-#include "git_initializer/constants.h"
-#include "git_initializer/helper.h"
-#include "httplib.h"
 
 #define CPPHTTPLIB_OPENSSL_SUPPORT
+#include <httplib.h>
 
 std::pair<bool, std::string> Utils::has_correct_arg_count(const std::string &arg_name, const int arg_count) noexcept {
   if (arg_name == constants::ADD_ARG) {
@@ -275,4 +276,18 @@ void Utils::run_git_commands() noexcept {
 
   Helper::log("Remote origin added successfully", constants::LogLevel::Success);
   Helper::add_delay();
+}
+
+std::string Utils::generate_suggestions(const std::string &invalid_file_name) noexcept {
+  std::string suggestions;
+  const std::regex pattern(std::format("{}.*", invalid_file_name), std::regex_constants::icase);
+  std::vector<std::string> valid_ign_file_names = Helper::load_valid_ign_file_names();
+
+  for (const auto &file_name : valid_ign_file_names) {
+    if (std::regex_match(file_name, pattern)) {
+      suggestions += file_name + ", ";
+    }
+  }
+
+  return suggestions;
 }

@@ -64,7 +64,7 @@ void ArgParser::parse_add_arg(const std::string &git_key, const std::string &git
   }
 }
 
-void ArgParser::parse_init_arg(const std::string &ign_arg_val) noexcept {
+void ArgParser::parse_init_arg(std::string &ign_arg_val) noexcept {
   Helper::log(
       std::format("Checking if {} and {} are added to the user profile....", constants::GIT_KEY, constants::GIT_USER),
       constants::LogLevel::Info);
@@ -73,7 +73,7 @@ void ArgParser::parse_init_arg(const std::string &ign_arg_val) noexcept {
   if (auto [env_exists, env] = Utils::env_exists(); env_exists) {
     std::string ign_files;
     if (!ign_arg_val.empty()) {
-      // TODO: Implement `trim()` to remove trailing whitespaces
+      Helper::trim_whitespaces(ign_arg_val);
       ign_files = ign_arg_val;
     } else {
       Helper::log(std::format("No ignore files specified - defaulting to: {}", constants::DEFAULT_IGN_FILES),
@@ -88,10 +88,15 @@ void ArgParser::parse_init_arg(const std::string &ign_arg_val) noexcept {
     for (const std::string &file_name : ign_file_names) {
       if (ign_files_json[file_name].isNull()) {
         Helper::log(std::format("Invalid ignore file: {}", file_name), constants::LogLevel::Error);
-        Helper::log("Please run: git-initializer lsig to see available ignore files", constants::LogLevel::Info);
+        std::string suggestions = Utils::generate_suggestions(file_name);
+        if (!suggestions.empty()) {
+          Helper::log(std::format("Possible matches: {}", suggestions), constants::LogLevel::Info);
+        } else {
+          Helper::log(std::format("No possible matches for: {}", file_name), constants::LogLevel::Info);
+        }
+        Helper::log("Please run: git-initializer lsig to see all available ignore files", constants::LogLevel::Info);
         Helper::exit_gracefully();
       }
-
       ign_file_content += ign_files_json[file_name]["contents"].asString();
     }
 

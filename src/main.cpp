@@ -1,5 +1,6 @@
 #include <format>
 #include <git_initializer/cmd/add.h>
+#include <git_initializer/cmd/init.h>
 #include <git_initializer/helper.h>
 #include <git_initializer/utils.h>
 
@@ -14,17 +15,10 @@ int main(int argc, char *argv[]) {
     Helper::exit_ungracefully();
   }
 
-  // if (argv[1] == constants::INIT_ARG ) {
-  //   if (argc == 2) {
-  //     ArgParser::parse_init_arg("");
-  //     return 0;
-  //   }
-  //
-  //   std::vector<std::string> ign_flag_vals = Helper::split_str(argv[2], '=');
-  //   ArgParser::parse_init_arg(ign_flag_vals.at(1));
-  //
-  //   return 0;
-  // }
+  if (argv[1] == constants::INIT_ARG) {
+    init_arg(argc, argv);
+    return 0;
+  }
   if (argv[1] == constants::ADD_ARG) {
     add_arg(argc, argv);
     return 0;

@@ -27,6 +27,10 @@ public:
   static std::vector<std::string> split_str(const std::string &s, char delim) noexcept;
 
   static bool to_bool(const std::string &str) noexcept;
+
+  static void trim_whitespaces(std::string &str) noexcept;
+
+  static std::vector<std::string> load_valid_ign_file_names() noexcept;
 };
 
 #endif // HELPER_H
